@@ -1,0 +1,9 @@
+{
+  "name": "DJS_Tut",
+  "version": "1.0.0",
+  "description": "This guide will guide to use cool features of discordjs and discord",
+  "main": "bot.js",
+  "repository": "https://github.com/nimit2801/DiscordJS-Guide-Tutorials",
+  "author": "Nimit2801",
+  "license": "ISC"
+}
