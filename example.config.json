@@ -1,0 +1,5 @@
+{
+  "clientID": "<Your Client ID>",
+  "clientSecret": "<clientSecret>",
+  "port": "53134"
+}

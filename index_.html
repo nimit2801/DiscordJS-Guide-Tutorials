@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Discord OAuth2 App</title>
+  </head>
+  <body>
+    <a href="http://localhost:53134/">Home</a>
+    <div id="info">Hoi!</div>
+    <a
+      id="login"
+      style="display: none"
+      href="https://discord.com/api/oauth2/authorize?client_id=797155989359034379&redirect_uri=http%3A%2F%2Flocalhost%3A53134&response_type=code&scope=identify"
+      >Identify Youself</a
+    >
+    <script>
+      window.onload = () => {
+        const fragment = new URLSearchParams(window.location.hash.slice(1));
+        const [accessToken, tokenType] = [
+          fragment.get('access_token'),
+          fragment.get('token_type'),
+        ];
+
+        if (!accessToken) {
+          console.log('No Access Token Found');
+          return (document.getElementById('login').style.display = 'block');
+        } else {
+          console.log('Access Token Found');
+          document.getElementById('info').innerText += accessToken;
+        }
+
+        fetch('https://discord.com/api/users/@me', {
+          headers: {
+            authorization: `${tokenType} ${accessToken}`,
+          },
+        })
+          .then((result) => result.json())
+          .then((response) => {
+            const { username, discriminator } = response;
+            document.getElementById(
+              'info'
+            ).innerText += ` ${username}#${discriminator}`;
+          })
+          .catch(console.error);
+      };
+    </script>
+  </body>
+</html>
